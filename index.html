@@ -386,8 +386,8 @@
           <div style="display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px;">
             <sc-for list="{{ catalog }}" as="v" hint-placeholder-count="9">
               <article onClick="{{ v.open }}" style="display: flex; flex-direction: column; background: #fff; border: 1px solid #E4E4E4; border-radius: 10px; overflow: hidden; cursor: pointer; transition: border-color .2s, box-shadow .2s, transform .2s;" style-hover="border-color: #C9C9C9; box-shadow: 0 6px 18px rgba(9,9,9,.08); transform: translateY(-3px);">
-                <div style="position: relative; height: 196px; background: #E9E9E8; background-image: repeating-linear-gradient(115deg, rgba(9,9,9,.05) 0 2px, transparent 2px 10px); display: flex; align-items: center; justify-content: center;">
-                  <span style="font-size: 11px; font-weight: 600; color: #8A8A8A;">{{ v.slot }}</span>
+                <div style="position: relative; height: 196px; background: #E9E9E8; {{ v.imgStyle }} display: flex; align-items: center; justify-content: center;">
+                  <span style="{{ v.slotStyle }}">{{ v.slot }}</span>
                   <span style="{{ v.badgeStyle }}">{{ v.badge }}</span>
                   <button onClick="{{ v.toggle }}" style="{{ v.favStyle }}">♥</button>
                   <span style="position: absolute; bottom: 10px; right: 10px; padding: 4px 8px; background: rgba(9,9,9,.78); color: #fff; border-radius: 4px; font-size: 11.5px; font-weight: 600;">{{ v.photos }} fotos</span>
@@ -428,8 +428,8 @@
 
       <div style="display: grid; grid-template-columns: minmax(0,1.55fr) minmax(0,1fr); gap: 26px; margin-top: 18px;">
         <div>
-          <div style="position: relative; height: 456px; background: #E9E9E8; background-image: repeating-linear-gradient(115deg, rgba(9,9,9,.05) 0 2px, transparent 2px 11px); border: 1px solid #E4E4E4; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
-            <span style="font-size: 12.5px; font-weight: 600; color: #8A8A8A;">FOTO PRINCIPAL — {{ current.title }}</span>
+          <div style="position: relative; height: 456px; background: #E9E9E8; {{ current.imgStyle }} border: 1px solid #E4E4E4; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+            <span style="{{ current.slotStyleBig }}">FOTO PRINCIPAL — {{ current.title }}</span>
             <span style="{{ current.badgeStyle }}">{{ current.badge }}</span>
             <span style="position: absolute; bottom: 14px; right: 14px; padding: 6px 11px; background: rgba(9,9,9,.78); color: #fff; border-radius: 4px; font-size: 12.5px; font-weight: 600;">1 / {{ current.photos }}</span>
             <span style="position: absolute; top: 50%; left: 14px; width: 38px; height: 38px; margin-top: -19px; display: flex; align-items: center; justify-content: center; background: #fff; border: 1px solid #E4E4E4; border-radius: 50%; font-size: 15px; cursor: pointer;">‹</span>
@@ -766,8 +766,8 @@
           <div style="display: flex; flex-direction: column; gap: 12px; margin-top: 14px;">
             <sc-for list="{{ destacados }}" as="v" hint-placeholder-count="3">
               <article onClick="{{ goMobVehiculo }}" style="background: #fff; border: 1px solid #E4E4E4; border-radius: 8px; overflow: hidden;">
-                <div style="position: relative; height: 170px; background: #E9E9E8; background-image: repeating-linear-gradient(115deg, rgba(9,9,9,.05) 0 2px, transparent 2px 10px); display: flex; align-items: center; justify-content: center;">
-                  <span style="font-size: 11px; font-weight: 600; color: #8A8A8A;">{{ v.slot }}</span>
+                <div style="position: relative; height: 170px; background: #E9E9E8; {{ v.imgStyle }} display: flex; align-items: center; justify-content: center;">
+                  <span style="{{ v.slotStyle }}">{{ v.slot }}</span>
                   <span style="{{ v.badgeStyle }}">{{ v.badge }}</span>
                   <button onClick="{{ v.toggle }}" style="{{ v.favStyle }}">♥</button>
                 </div>
@@ -827,8 +827,8 @@
 
       <sc-if value="{{ mobVehiculo }}">
       <div style="padding-bottom: 74px;">
-        <div style="position: relative; height: 230px; background: #E9E9E8; background-image: repeating-linear-gradient(115deg, rgba(9,9,9,.05) 0 2px, transparent 2px 10px); display: flex; align-items: center; justify-content: center;">
-          <span style="font-size: 12px; font-weight: 600; color: #8A8A8A;">FOTO PRINCIPAL</span>
+        <div style="position: relative; height: 230px; background: #E9E9E8; {{ current.imgStyle }} display: flex; align-items: center; justify-content: center;">
+          <span style="{{ current.slotStyleBig }}">FOTO PRINCIPAL</span>
           <span style="position: absolute; bottom: 12px; right: 12px; padding: 5px 9px; background: rgba(9,9,9,.78); color: #fff; border-radius: 4px; font-size: 11.5px; font-weight: 600;">1 / 12</span>
         </div>
         <div style="display: flex; gap: 8px; padding: 10px 16px; overflow: hidden; background: #fff; border-bottom: 1px solid #E4E4E4;">
@@ -1048,7 +1048,7 @@
           </div>
           <sc-for list="{{ adminRows }}" as="r" hint-placeholder-count="8">
             <div style="min-width: 900px; display: grid; grid-template-columns: 62px 2fr .6fr 1.1fr .8fr .9fr .7fr 118px; gap: 12px; align-items: center; padding: 12px 18px; border-bottom: 1px solid #EFEFEE; font-size: 14px; transition: background .2s;" style-hover="background: #FAFAF9;">
-              <span style="height: 40px; background: #E9E9E8; background-image: repeating-linear-gradient(115deg, rgba(9,9,9,.06) 0 2px, transparent 2px 8px); border-radius: 4px;"></span>
+              <span style="height: 40px; background: #E9E9E8; {{ r.imgStyle }} border-radius: 4px;"></span>
               <div>
                 <div style="font-weight: 500;">{{ r.name }}</div>
                 <div style="font-size: 12px; color: #737373;">{{ r.version }}</div>
@@ -1312,9 +1312,9 @@ class Component extends DCLogic {
 
   cars() {
     return [
-      { id: 'hilux', title: 'Toyota Hilux SRV 4x4', version: '2.8 TDI 4x4 · 204 cv', year: '2021', km: '78.000 km', caja: 'Automática', fuel: 'Diésel', ars: '$58.900.000', usd: 'US$ 42.500', badge: 'DESTACADO', photos: 12 },
+      { id: 'hilux', title: 'Toyota Hilux SRV 4x4', version: '2.8 TDI 4x4 · 204 cv', year: '2021', km: '78.000 km', caja: 'Automática', fuel: 'Diésel', ars: '$58.900.000', usd: 'US$ 42.500', badge: 'DESTACADO', photos: 12, img: 'assets/hilux.jpg' },
       { id: 'xc60', title: 'Volvo XC60 Inscription', version: 'T5 AWD · 254 cv', year: '2018', km: '89.000 km', caja: 'Automática', fuel: 'Nafta', ars: '$59.000.000', usd: 'US$ 42.600', badge: 'DESTACADO', photos: 10 },
-      { id: 'amarok', title: 'Volkswagen Amarok V6', version: 'Highline 3.0 V6', year: '2019', km: '112.000 km', caja: 'Automática', fuel: 'Diésel', ars: '$47.500.000', usd: 'US$ 34.300', badge: 'OFERTA', photos: 14, old: '$51.900.000' },
+      { id: 'amarok', title: 'Volkswagen Amarok V6', version: 'Highline 3.0 V6', year: '2019', km: '112.000 km', caja: 'Automática', fuel: 'Diésel', ars: '$47.500.000', usd: 'US$ 34.300', badge: 'OFERTA', photos: 14, old: '$51.900.000', img: 'assets/amarok.jpg' },
       { id: 'tracker', title: 'Chevrolet Tracker Premier', version: '1.2 Turbo', year: '2022', km: '41.000 km', caja: 'Automática', fuel: 'Nafta', ars: '$32.400.000', usd: 'US$ 23.400', badge: 'DESTACADO', photos: 11 },
       { id: 'ranger', title: 'Ford Ranger Limited', version: '3.2 TDCi 4x4', year: '2020', km: '95.000 km', caja: 'Automática', fuel: 'Diésel', ars: '$51.200.000', usd: 'US$ 37.000', badge: 'OFERTA', photos: 9, old: '$54.500.000' },
       { id: 'p208', title: 'Peugeot 208 Feline', version: '1.6 Tiptronic', year: '2021', km: '56.000 km', caja: 'Automática', fuel: 'Nafta', ars: '$24.900.000', usd: 'US$ 18.000', badge: 'OFERTA', photos: 8, old: '$26.400.000' },
@@ -1330,7 +1330,10 @@ class Component extends DCLogic {
     const on = !!this.state.favs[c.id];
     return Object.assign({}, c, {
       meta: c.year + ' · ' + c.km + ' · ' + c.caja,
-      slot: 'FOTO ' + c.title.toUpperCase(),
+      slot: c.img ? '' : 'FOTO ' + c.title.toUpperCase(),
+      imgStyle: c.img ? 'background: url(' + c.img + ') center/cover no-repeat;' : 'background-image: repeating-linear-gradient(115deg, rgba(9,9,9,.05) 0 2px, transparent 2px 10px);',
+      slotStyle: c.img ? 'display: none;' : 'font-size: 11px; font-weight: 600; color: #8A8A8A;',
+      slotStyleBig: c.img ? 'display: none;' : 'font-size: 12.5px; font-weight: 600; color: #8A8A8A;',
       badge: c.badge || '',
       badgeStyle: this.badgeStyle(c.badge, o.badgePos || 10),
       favStyle: this.heart(on, o.heart || 34),
@@ -1379,9 +1382,9 @@ class Component extends DCLogic {
     }));
 
     const adminRows = [
-      { id: 'hilux', name: 'Toyota Hilux SRV 4x4', version: '2.8 TDI · Pick-Up', year: '2021', price: '$58.900.000', km: '78.000', estado: 'Publicado' },
+      { id: 'hilux', name: 'Toyota Hilux SRV 4x4', version: '2.8 TDI · Pick-Up', year: '2021', price: '$58.900.000', km: '78.000', estado: 'Publicado', img: 'assets/hilux.jpg' },
       { id: 'xc60', name: 'Volvo XC60 Inscription', version: 'T5 AWD · SUV', year: '2018', price: '$59.000.000', km: '89.000', estado: 'Publicado' },
-      { id: 'amarok', name: 'Volkswagen Amarok V6', version: 'Highline · Pick-Up', year: '2019', price: '$47.500.000', km: '112.000', estado: 'Reservado' },
+      { id: 'amarok', name: 'Volkswagen Amarok V6', version: 'Highline · Pick-Up', year: '2019', price: '$47.500.000', km: '112.000', estado: 'Reservado', img: 'assets/amarok.jpg' },
       { id: 'tracker', name: 'Chevrolet Tracker Premier', version: '1.2 Turbo · SUV', year: '2022', price: '$32.400.000', km: '41.000', estado: 'Publicado' },
       { id: 'ranger', name: 'Ford Ranger Limited', version: '3.2 TDCi · Pick-Up', year: '2020', price: '$51.200.000', km: '95.000', estado: 'Publicado' },
       { id: 'p208', name: 'Peugeot 208 Feline', version: '1.6 · Hatchback', year: '2021', price: '$24.900.000', km: '56.000', estado: 'Borrador' },
@@ -1391,6 +1394,7 @@ class Component extends DCLogic {
       const d = !!s.dest[r.id], w = !!s.webOn[r.id];
       return Object.assign({}, r, {
         badge: this.pillBadge(r.estado),
+        imgStyle: r.img ? 'background: url(' + r.img + ') center/cover no-repeat;' : 'background-image: repeating-linear-gradient(115deg, rgba(9,9,9,.06) 0 2px, transparent 2px 8px);',
         destStyle: 'justify-self: start; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; background: ' + (d ? '#C9081F' : '#fff') + '; color: ' + (d ? '#fff' : '#C9C9C9') + '; border: 1px solid ' + (d ? '#C9081F' : '#E4E4E4') + '; border-radius: 4px; font-size: 13px; cursor: pointer; transition: background .2s, color .2s;',
         webStyle: 'justify-self: start; padding: 5px 9px; background: ' + (w ? '#090909' : '#fff') + '; color: ' + (w ? '#fff' : '#737373') + '; border: 1px solid ' + (w ? '#090909' : '#E4E4E4') + '; border-radius: 4px; font-size: 12px; font-weight: 600; cursor: pointer; transition: background .2s, color .2s;',
         web: w ? 'ON' : 'OFF',
