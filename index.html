@@ -335,15 +335,15 @@
         <aside style="align-self: start; position: sticky; top: 130px; background: #fff; border: 1px solid #E4E4E4; border-radius: 10px; overflow: hidden;">
           <div style="display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 16px 18px; border-bottom: 1px solid #E4E4E4;">
             <span style="font-size: 15px; font-weight: 600;">Filtros</span>
-            <button style="padding: 6px 10px; background: transparent; border: 1px solid #E4E4E4; border-radius: 4px; font-size: 12.5px; font-weight: 600; color: #C9081F; cursor: pointer; white-space: nowrap;">Limpiar filtros</button>
+            <button onClick="{{ clearFilters }}" style="padding: 6px 10px; background: transparent; border: 1px solid #E4E4E4; border-radius: 4px; font-size: 12.5px; font-weight: 600; color: #C9081F; cursor: pointer; white-space: nowrap;">Limpiar filtros</button>
           </div>
           <div style="padding: 16px 18px; display: flex; flex-direction: column; gap: 16px;">
             <sc-for list="{{ filterSelects }}" as="f" hint-placeholder-count="5">
               <label style="display: flex; flex-direction: column; gap: 7px;">
                 <span style="font-size: 12.5px; font-weight: 600; color: #737373;">{{ f.label }}</span>
-                <select style="width: 100%; padding: 10px; background: #fff; border: 1px solid #E4E4E4; border-radius: 6px; font-size: 14px; appearance: none; cursor: pointer;">
+                <select value="{{ f.value }}" onChange="{{ f.onChange }}" style="width: 100%; padding: 10px; background: #fff; border: 1px solid #E4E4E4; border-radius: 6px; font-size: 14px; appearance: none; cursor: pointer;">
                   <sc-for list="{{ f.options }}" as="o" hint-placeholder-count="3">
-                    <option>{{ o.label }}</option>
+                    <option value="{{ o.label }}">{{ o.label }}</option>
                   </sc-for>
                 </select>
               </label>
@@ -361,7 +361,7 @@
             <div style="font-size: 12.5px; font-weight: 600; color: #737373;">Kilometraje</div>
             <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px;">
               <sc-for list="{{ kmChips }}" as="c" hint-placeholder-count="4">
-                <span style="{{ c.style }}">{{ c.label }}</span>
+                <span onClick="{{ c.onClick }}" style="{{ c.style }}">{{ c.label }}</span>
               </sc-for>
             </div>
           </div>
@@ -369,8 +369,8 @@
             <div style="font-size: 12.5px; font-weight: 600; color: #737373;">Transmisión</div>
             <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 12px;">
               <sc-for list="{{ cajas }}" as="c" hint-placeholder-count="3">
-                <label style="display: flex; align-items: center; gap: 10px; font-size: 14.5px; color: #454545; cursor: pointer;">
-                  <span style="width: 15px; height: 15px; border: 1px solid #C9C9C9; border-radius: 3px; background: #fff;"></span>{{ c.label }}
+                <label onClick="{{ c.onClick }}" style="display: flex; align-items: center; gap: 10px; font-size: 14.5px; color: #454545; cursor: pointer;">
+                  <span style="{{ c.style }}">{{ c.check }}</span>{{ c.label }}
                 </label>
               </sc-for>
             </div>
@@ -380,7 +380,7 @@
         <div>
           <div style="display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px;">
             <sc-for list="{{ activeChips }}" as="c" hint-placeholder-count="3">
-              <span style="display: inline-flex; align-items: center; gap: 8px; padding: 7px 11px; background: #fff; border: 1px solid #E4E4E4; border-radius: 999px; font-size: 13px; font-weight: 500;">{{ c.label }}<span style="color: #8A8A8A;">✕</span></span>
+              <span style="display: inline-flex; align-items: center; gap: 8px; padding: 7px 11px; background: #fff; border: 1px solid #E4E4E4; border-radius: 999px; font-size: 13px; font-weight: 500;">{{ c.label }}<span onClick="{{ c.remove }}" style="color: #8A8A8A; cursor: pointer;">✕</span></span>
             </sc-for>
           </div>
           <div style="display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px;">
@@ -1314,17 +1314,24 @@ class Component extends DCLogic {
 
   cars() {
     return [
-      { id: 'hilux', title: 'Toyota Hilux SRV 4x4', version: '2.8 TDI 4x4 · 204 cv', year: '2021', km: '78.000 km', caja: 'Automática', fuel: 'Diésel', ars: '$58.900.000', usd: 'US$ 42.500', badge: 'DESTACADO', photos: 12, img: 'assets/hilux.jpg' },
-      { id: 'xc60', title: 'Volvo XC60 Inscription', version: 'T5 AWD · 254 cv', year: '2018', km: '89.000 km', caja: 'Automática', fuel: 'Nafta', ars: '$59.000.000', usd: 'US$ 42.600', badge: 'DESTACADO', photos: 10 },
-      { id: 'amarok', title: 'Volkswagen Amarok V6', version: 'Highline 3.0 V6', year: '2019', km: '112.000 km', caja: 'Automática', fuel: 'Diésel', ars: '$47.500.000', usd: 'US$ 34.300', badge: 'OFERTA', photos: 14, old: '$51.900.000', img: 'assets/amarok.jpg' },
-      { id: 'tracker', title: 'Chevrolet Tracker Premier', version: '1.2 Turbo', year: '2022', km: '41.000 km', caja: 'Automática', fuel: 'Nafta', ars: '$32.400.000', usd: 'US$ 23.400', badge: 'DESTACADO', photos: 11 },
-      { id: 'ranger', title: 'Ford Ranger Limited', version: '3.2 TDCi 4x4', year: '2020', km: '95.000 km', caja: 'Automática', fuel: 'Diésel', ars: '$51.200.000', usd: 'US$ 37.000', badge: 'OFERTA', photos: 9, old: '$54.500.000' },
-      { id: 'p208', title: 'Peugeot 208 Feline', version: '1.6 Tiptronic', year: '2021', km: '56.000 km', caja: 'Automática', fuel: 'Nafta', ars: '$24.900.000', usd: 'US$ 18.000', badge: 'OFERTA', photos: 8, old: '$26.400.000' },
-      { id: 'taos', title: 'Volkswagen Taos Comfortline', version: '1.4 TSI', year: '2023', km: '18.000 km', caja: 'Automática', fuel: 'Nafta', ars: '$41.800.000', usd: 'US$ 30.200', badge: 'NUEVO INGRESO', photos: 12 },
-      { id: 'cronos', title: 'Fiat Cronos Drive', version: '1.3 GSE', year: '2022', km: '39.000 km', caja: 'Manual', fuel: 'Nafta', ars: '$21.300.000', usd: 'US$ 15.400', badge: 'NUEVO INGRESO', photos: 9 },
-      { id: 'hrv', title: 'Honda HR-V EXL', version: '1.8 CVT', year: '2019', km: '72.000 km', caja: 'Automática', fuel: 'Nafta', ars: '$33.600.000', usd: 'US$ 24.300', badge: 'NUEVO INGRESO', photos: 10 },
-      { id: 'alaskan', title: 'Renault Alaskan Iconic', version: '2.3 dCi 4x4', year: '2020', km: '88.000 km', caja: 'Automática', fuel: 'Diésel', ars: '$39.900.000', usd: 'US$ 28.800', badge: '', photos: 7 }
-    ];
+      { id: 'hilux', title: 'Toyota Hilux SRV 4x4', version: '2.8 TDI 4x4 · 204 cv', year: '2021', km: '78.000 km', caja: 'Automática', fuel: 'Diésel', ars: '$58.900.000', usd: 'US$ 42.500', badge: 'DESTACADO', photos: 12, img: 'assets/hilux.jpg', tipo: 'Pick-Up', condicion: 'Usados' },
+      { id: 'xc60', title: 'Volvo XC60 Inscription', version: 'T5 AWD · 254 cv', year: '2018', km: '89.000 km', caja: 'Automática', fuel: 'Nafta', ars: '$59.000.000', usd: 'US$ 42.600', badge: 'DESTACADO', photos: 10, tipo: 'SUV', condicion: 'Usados' },
+      { id: 'amarok', title: 'Volkswagen Amarok V6', version: 'Highline 3.0 V6', year: '2019', km: '112.000 km', caja: 'Automática', fuel: 'Diésel', ars: '$47.500.000', usd: 'US$ 34.300', badge: 'OFERTA', photos: 14, old: '$51.900.000', img: 'assets/amarok.jpg', tipo: 'Pick-Up', condicion: 'Usados' },
+      { id: 'tracker', title: 'Chevrolet Tracker Premier', version: '1.2 Turbo', year: '2022', km: '41.000 km', caja: 'Automática', fuel: 'Nafta', ars: '$32.400.000', usd: 'US$ 23.400', badge: 'DESTACADO', photos: 11, tipo: 'SUV', condicion: 'Usados' },
+      { id: 'ranger', title: 'Ford Ranger Limited', version: '3.2 TDCi 4x4', year: '2020', km: '95.000 km', caja: 'Automática', fuel: 'Diésel', ars: '$51.200.000', usd: 'US$ 37.000', badge: 'OFERTA', photos: 9, old: '$54.500.000', tipo: 'Pick-Up', condicion: 'Usados' },
+      { id: 'p208', title: 'Peugeot 208 Feline', version: '1.6 Tiptronic', year: '2021', km: '56.000 km', caja: 'Automática', fuel: 'Nafta', ars: '$24.900.000', usd: 'US$ 18.000', badge: 'OFERTA', photos: 8, old: '$26.400.000', tipo: 'Hatchback', condicion: 'Usados' },
+      { id: 'taos', title: 'Volkswagen Taos Comfortline', version: '1.4 TSI', year: '2023', km: '18.000 km', caja: 'Automática', fuel: 'Nafta', ars: '$41.800.000', usd: 'US$ 30.200', badge: 'NUEVO INGRESO', photos: 12, tipo: 'SUV', condicion: 'Usados' },
+      { id: 'cronos', title: 'Fiat Cronos Drive', version: '1.3 GSE', year: '2022', km: '39.000 km', caja: 'Manual', fuel: 'Nafta', ars: '$21.300.000', usd: 'US$ 15.400', badge: 'NUEVO INGRESO', photos: 9, tipo: 'Sedán', condicion: 'Usados' },
+      { id: 'hrv', title: 'Honda HR-V EXL', version: '1.8 CVT', year: '2019', km: '72.000 km', caja: 'Automática', fuel: 'Nafta', ars: '$33.600.000', usd: 'US$ 24.300', badge: 'NUEVO INGRESO', photos: 10, tipo: 'SUV', condicion: 'Usados' },
+      { id: 'alaskan', title: 'Renault Alaskan Iconic', version: '2.3 dCi 4x4', year: '2020', km: '88.000 km', caja: 'Automática', fuel: 'Diésel', ars: '$39.900.000', usd: 'US$ 28.800', badge: '', photos: 7, tipo: 'Pick-Up', condicion: 'Usados' }
+    ].map(c => {
+       c.marca = c.title.split(' ')[0];
+       c.modelo = c.title.split(' ')[1];
+       if (c.modelo === 'HR-V') c.modelo = 'HRV';
+       c.precio = parseInt(c.ars.replace(/\D/g, '')) / 1000000;
+       c.kmNum = parseInt(c.km.replace(/\D/g, ''));
+       return c;
+    });
   }
 
   decorate(c, opts) {
@@ -1353,8 +1360,49 @@ class Component extends DCLogic {
   renderVals() {
     const s = this.state;
     const cars = this.cars();
-    const byId = {};
-    cars.forEach(c => { byId[c.id] = c; });
+    const byId = {}; cars.forEach(c => byId[c.id] = c);
+    
+    if (s.priceMax === undefined) s.priceMax = 90;
+
+    const cat = cars.filter(c => {
+      const fs = s.filters || {};
+      if (s.priceMax < 90 && c.precio > s.priceMax) return false;
+      if (fs.Marca && fs.Marca !== 'Todas' && c.marca !== fs.Marca) return false;
+      if (fs.Modelo && fs.Modelo !== 'Todos' && c.modelo !== fs.Modelo) return false;
+      if (fs.Tipo && fs.Tipo !== 'Todos' && c.tipo !== fs.Tipo) return false;
+      if (fs.Condición && fs.Condición !== '0KM y usados' && c.condicion !== fs.Condición) return false;
+      if (fs.Combustible && fs.Combustible !== 'Todos' && c.fuel !== fs.Combustible) return false;
+      if (fs.Año && fs.Año !== 'Cualquiera') {
+         const y = parseInt(c.year);
+         if (fs.Año === '2023 o más' && y < 2023) return false;
+         if (fs.Año === '2020 – 2022' && (y < 2020 || y > 2022)) return false;
+         if (fs.Año === '2015 – 2019' && (y < 2015 || y > 2019)) return false;
+      }
+      if (fs.km && fs.km !== 'Cualquiera') {
+         const k = c.kmNum;
+         if (fs.km === '0KM' && k > 0) return false;
+         if (fs.km === 'Hasta 30.000' && k > 30000) return false;
+         if (fs.km === '30–60.000' && (k < 30000 || k > 60000)) return false;
+         if (fs.km === '60–100.000' && (k < 60000 || k > 100000)) return false;
+         if (fs.km === 'Más de 100.000' && k <= 100000) return false;
+      }
+      if (fs.caja && fs.caja !== 'Indistinto' && c.caja !== fs.caja) return false;
+      return true;
+    });
+
+    const activeChips = [];
+    if (s.priceMax < 90) activeChips.push({ label: 'Hasta $' + s.priceMax + 'M', key: 'priceMax' });
+    const fs = s.filters || {};
+    if (fs.Marca && fs.Marca !== 'Todas') activeChips.push({ label: fs.Marca, key: 'Marca' });
+    if (fs.Modelo && fs.Modelo !== 'Todos') activeChips.push({ label: fs.Modelo, key: 'Modelo' });
+    if (fs.Tipo && fs.Tipo !== 'Todos') activeChips.push({ label: fs.Tipo, key: 'Tipo' });
+    if (fs.Condición && fs.Condición !== '0KM y usados') activeChips.push({ label: fs.Condición, key: 'Condición' });
+    if (fs.Año && fs.Año !== 'Cualquiera') activeChips.push({ label: fs.Año, key: 'Año' });
+    if (fs.Combustible && fs.Combustible !== 'Todos') activeChips.push({ label: fs.Combustible, key: 'Combustible' });
+    if (fs.km && fs.km !== 'Cualquiera') activeChips.push({ label: fs.km, key: 'km' });
+    if (fs.caja && fs.caja !== 'Indistinto') activeChips.push({ label: fs.caja, key: 'caja' });
+
+    const currentId = s.currentId || 'hilux';
     const setWeb = (web) => () => this.setState({ web, mode: 'web' });
     const setAdmin = (admin) => () => this.setState({ admin, mode: 'admin' });
 
@@ -1457,7 +1505,7 @@ class Component extends DCLogic {
       destacados: [byId.hilux, byId.xc60, byId.tracker].map(c => this.decorate(c, { badgePos: 12 })),
       ofertas: [byId.amarok, byId.ranger, byId.p208].map(c => this.decorate(c, { badgePos: 10 })),
       recientes: [byId.taos, byId.cronos, byId.hrv, byId.alaskan].map(c => this.decorate(c)),
-      catalog: cars.slice(0, 9).map(c => this.decorate(c)),
+      catalog: cat.map(c => this.decorate(c)),
       similares: [byId.ranger, byId.amarok, byId.alaskan, byId.tracker].map(c => this.decorate(c)),
       current,
       currentImgDisplay: (s.imgIdx || 0) % (current.photos || 1) + 1,
@@ -1486,23 +1534,53 @@ class Component extends DCLogic {
         { label: 'Transmisión', options: [{ label: 'Todas' }, { label: 'Automática' }, { label: 'Manual' }] }
       ],
       filterSelects: [
-        { label: 'Marca', options: [{ label: 'Todas' }, { label: 'Toyota' }, { label: 'Volkswagen' }, { label: 'Ford' }] },
-        { label: 'Modelo', options: [{ label: 'Todos' }, { label: 'Hilux' }, { label: 'Amarok' }] },
-        { label: 'Tipo', options: [{ label: 'Todos' }, { label: 'Pick-Up' }, { label: 'SUV' }, { label: 'Sedán' }] },
-        { label: 'Condición', options: [{ label: '0KM y usados' }, { label: '0KM' }, { label: 'Usados' }] },
-        { label: 'Año', options: [{ label: 'Cualquiera' }, { label: '2023 o más' }, { label: '2020 – 2022' }] },
-        { label: 'Combustible', options: [{ label: 'Todos' }, { label: 'Nafta' }, { label: 'Diésel' }] }
-      ],
-      kmChips: ['Hasta 30.000', '30–60.000', '60–100.000', 'Más de 100.000'].map((label, i) => ({
-        label,
-        style: 'padding: 7px 10px; background: ' + (i === 1 ? '#090909' : '#fff') + '; color: ' + (i === 1 ? '#fff' : '#454545') + '; border: 1px solid ' + (i === 1 ? '#090909' : '#E4E4E4') + '; border-radius: 999px; font-size: 12.5px; font-weight: 500; cursor: pointer;'
+        { key: 'Marca', label: 'Marca', options: [{ label: 'Todas' }, { label: 'Toyota' }, { label: 'Volkswagen' }, { label: 'Ford' }] },
+        { key: 'Modelo', label: 'Modelo', options: [{ label: 'Todos' }, { label: 'Hilux' }, { label: 'Amarok' }] },
+        { key: 'Tipo', label: 'Tipo', options: [{ label: 'Todos' }, { label: 'Pick-Up' }, { label: 'SUV' }, { label: 'Sedán' }] },
+        { key: 'Condición', label: 'Condición', options: [{ label: '0KM y usados' }, { label: '0KM' }, { label: 'Usados' }] },
+        { key: 'Año', label: 'Año', options: [{ label: 'Cualquiera' }, { label: '2023 o más' }, { label: '2020 – 2022' }] },
+        { key: 'Combustible', label: 'Combustible', options: [{ label: 'Todos' }, { label: 'Nafta' }, { label: 'Diésel' }] }
+      ].map(f => {
+         return Object.assign({}, f, {
+            value: (s.filters || {})[f.key] || f.options[0].label,
+            onChange: (e) => {
+               const val = e.target.value;
+               this.setState(st => ({ filters: Object.assign({}, st.filters || {}, { [f.key]: val }) }));
+            }
+         });
+      }),
+      kmChips: ['Cualquiera', 'Hasta 30.000', '30–60.000', '60–100.000', 'Más de 100.000'].map((label, i) => {
+        const active = (s.filters || {}).km === label || (!(s.filters || {}).km && i === 0);
+        return {
+          label,
+          style: 'padding: 7px 10px; background: ' + (active ? '#090909' : '#fff') + '; color: ' + (active ? '#fff' : '#454545') + '; border: 1px solid ' + (active ? '#090909' : '#E4E4E4') + '; border-radius: 999px; font-size: 12.5px; font-weight: 500; cursor: pointer;',
+          onClick: () => this.setState(st => ({ filters: Object.assign({}, st.filters || {}, { km: label }) }))
+        };
+      }),
+      cajas: [{ label: 'Automática' }, { label: 'Manual' }, { label: 'Indistinto' }].map(c => {
+         const active = (s.filters || {}).caja === c.label || (!(s.filters || {}).caja && c.label === 'Indistinto');
+         return {
+            label: c.label,
+            style: 'width: 15px; height: 15px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid ' + (active ? '#C9081F' : '#C9C9C9') + '; border-radius: 3px; background: ' + (active ? '#C9081F' : '#fff') + '; color: #fff; font-size: 12px;',
+            check: active ? '✓' : '',
+            onClick: () => this.setState(st => ({ filters: Object.assign({}, st.filters || {}, { caja: c.label }) }))
+         }
+      }),
+      activeChips: activeChips.map(c => Object.assign(c, {
+         remove: () => {
+            if (c.key === 'priceMax') this.setState({ priceMax: 90 });
+            else this.setState(st => {
+               let nf = Object.assign({}, st.filters || {});
+               delete nf[c.key];
+               return { filters: nf };
+            });
+         }
       })),
-      cajas: [{ label: 'Automática' }, { label: 'Manual' }, { label: 'Indistinto' }],
-      activeChips: [{ label: 'Pick-Up' }, { label: '30–60.000 km' }, { label: 'Hasta $' + s.priceMax + 'M' }],
+      clearFilters: () => this.setState({ filters: {}, priceMax: 90 }),
       priceMax: s.priceMax,
       priceLabel: '$' + s.priceMax + 'M',
       onPrice: (e) => this.setState({ priceMax: Number(e.target.value) }),
-      resultCount: 124,
+      resultCount: cat.length,
       pages: ['←', '1', '2', '3', '9', '→'].map((label, i) => ({
         label,
         style: 'min-width: 34px; padding: 8px 0; text-align: center; background: ' + (i === 1 ? '#090909' : '#fff') + '; color: ' + (i === 1 ? '#fff' : '#454545') + '; border: 1px solid ' + (i === 1 ? '#090909' : '#E4E4E4') + '; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;'
