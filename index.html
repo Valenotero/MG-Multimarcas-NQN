@@ -716,19 +716,44 @@
         <span>9:41</span><span>LTE ▮▮</span>
       </div>
       <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; background: #090909;">
-        <div style="display: flex; align-items: center; gap: 9px;">
+        <div onClick="{{ goHomeMob }}" style="display: flex; align-items: center; gap: 9px; cursor: pointer;">
           <img src="assets/mg-logo.jpg" alt="MG" style="width: 32px; height: 32px; object-fit: cover; border-radius: 4px;">
           <span style="font-family: 'Barlow Semi Condensed', sans-serif; font-weight: 600; font-size: 15.5px; color: #fff;">M.G. MULTIMARCAS</span>
         </div>
         <div style="display: flex; align-items: center; gap: 14px;">
-          <span style="font-size: 15px; color: #C9081F;">♥</span>
-          <div style="display: flex; flex-direction: column; gap: 3.5px; width: 19px;">
+          <span onClick="{{ goMobFavoritos }}" style="font-size: 15px; color: #C9081F; cursor: pointer;">♥</span>
+          <div onClick="{{ toggleMobMenu }}" style="display: flex; flex-direction: column; gap: 3.5px; width: 19px; cursor: pointer; padding: 4px 0;">
             <span style="height: 2px; background: #fff; border-radius: 2px;"></span>
             <span style="height: 2px; background: #fff; border-radius: 2px;"></span>
             <span style="height: 2px; width: 12px; background: #C9081F; border-radius: 2px;"></span>
           </div>
         </div>
       </div>
+      <sc-if value="{{ mobMenuOpen }}">
+        <div style="position: absolute; inset: 0; z-index: 50; background: #090909; display: flex; flex-direction: column;">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 10px 20px 4px; color: #fff; font-size: 12px; font-weight: 600;">
+            <span>9:41</span><span>LTE ▮▮</span>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px;">
+            <div onClick="{{ goHomeMob }}" style="display: flex; align-items: center; gap: 9px; cursor: pointer;">
+              <img src="assets/mg-logo.jpg" alt="MG" style="width: 32px; height: 32px; object-fit: cover; border-radius: 4px;">
+              <span style="font-family: 'Barlow Semi Condensed', sans-serif; font-weight: 600; font-size: 15.5px; color: #fff;">M.G. MULTIMARCAS</span>
+            </div>
+            <div onClick="{{ toggleMobMenu }}" style="padding: 6px; cursor: pointer;">
+              <span style="font-size: 24px; color: #fff; line-height: 1;">✕</span>
+            </div>
+          </div>
+          <div style="flex: 1; padding: 24px; display: flex; flex-direction: column; gap: 24px;">
+            <a href="#" onClick="{{ goHomeMob }}" style="font-size: 22px; font-weight: 600; color: #fff; text-decoration: none;">Inicio</a>
+            <a href="#" onClick="{{ goMobCatalogo }}" style="font-size: 22px; font-weight: 600; color: #fff; text-decoration: none;">Vehículos</a>
+            <a href="https://wa.me/5492995189429?text=Hola,%20me%20gustar%C3%ADa%20consultar%20por%20las%20opciones%20de%20financiaci%C3%B3n" target="_blank" style="font-size: 22px; font-weight: 600; color: #fff; text-decoration: none;">Financiación</a>
+            <a href="#" style="font-size: 22px; font-weight: 600; color: #8A8A8A; text-decoration: none;">Nosotros</a>
+          </div>
+          <div style="padding: 24px;">
+             <a href="https://wa.me/5492995189429?text=Hola,%20vengo%20desde%20la%20p%C3%A1gina%20web%20y%20quiero%20preguntar%20algo" target="_blank" style="display: block; padding: 14px; background: #C9081F; color: #fff; text-align: center; border-radius: 6px; font-size: 16px; font-weight: 600; text-decoration: none;">WhatsApp</a>
+          </div>
+        </div>
+      </sc-if>
 
       <sc-if value="{{ mobHome }}" hint-placeholder-val="{{ true }}">
       <div>
@@ -1628,14 +1653,18 @@ class Component extends DCLogic {
       mobCatalogo: s.mob === 'catalogo',
       mobVehiculo: s.mob === 'vehiculo',
       mobFavoritos: s.mob === 'favoritos',
-      goMobCatalogo: () => this.setState({ mob: 'catalogo' }),
-      goMobVehiculo: () => this.setState({ mob: 'vehiculo' }),
+      goMobCatalogo: () => this.setState({ mob: 'catalogo', mobMenu: false }),
+      goMobVehiculo: () => this.setState({ mob: 'vehiculo', mobMenu: false }),
+      goMobFavoritos: () => this.setState({ mob: 'favoritos', mobMenu: false }),
+      goHomeMob: () => this.setState({ mob: 'home', mobMenu: false }),
       mobBottomNav: [['home', 'Inicio'], ['catalogo', 'Vehículos'], ['favoritos', 'Favoritos'], ['vehiculo', 'Contacto']].map(([id, label]) => ({
         label, go: () => this.setState({ mob: id }),
         style: 'flex: 1; padding: 8px 4px; background: transparent; border: none; font-size: 12px; font-weight: 600; cursor: pointer; color: ' + (s.mob === id ? '#C9081F' : '#737373') + ';'
       })),
       sheetOpen: s.sheet,
       toggleSheet: () => this.setState(st => ({ sheet: !st.sheet })),
+      mobMenuOpen: s.mobMenu,
+      toggleMobMenu: () => this.setState(st => ({ mobMenu: !st.mobMenu })),
 
       adminNav: [['resumen', 'Resumen', ''], ['vehiculos', 'Vehículos', '124'], ['consultas', 'Consultas', '4'], ['reservas', 'Reservas', '9'], ['financiaciones', 'Financiaciones', ''], ['usuarios', 'Usuarios', ''], ['config', 'Configuración', '']].map(([id, label, count]) => ({
         label, count,
