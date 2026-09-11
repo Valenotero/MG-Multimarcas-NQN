@@ -53,7 +53,7 @@
 <div style="min-height: 100vh; background: #F5F5F4;">
 
   <div style="position: sticky; top: 0; z-index: 950; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; padding: 8px 16px; background: #1C1C1C; border-bottom: 1px solid #2B2B2B; color: #fff;">
-    <span style="font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: #8A8A8A;">Mockup</span>
+
     <div style="display: flex; gap: 2px; padding: 2px; background: #090909; border-radius: 6px;">
       <sc-for list="{{ modes }}" as="m" hint-placeholder-count="2">
         <button onClick="{{ m.go }}" style="{{ m.style }}">{{ m.label }}</button>
@@ -82,7 +82,7 @@
         <nav style="display: flex; flex-wrap: wrap; gap: 8px 20px; min-width: 0;">
           <a href="#" onClick="{{ goHome }}" style="{{ navHome }}">Inicio</a>
           <a href="#" onClick="{{ goCatalogo }}" style="{{ navCatalogo }}">Vehículos</a>
-          <a href="#" style="font-size: 15px; font-weight: 500; color: #C4C4C4; padding: 6px 0; transition: color .2s;" style-hover="color: #fff;">Financiación</a>
+          <a href="https://wa.me/5492995189429?text=Hola,%20me%20gustar%C3%ADa%20consultar%20por%20las%20opciones%20de%20financiaci%C3%B3n" target="_blank" style="font-size: 15px; font-weight: 500; color: #C4C4C4; padding: 6px 0; transition: color .2s;" style-hover="color: #fff;">Financiación</a>
           <a href="#" onClick="{{ goNosotros }}" style="{{ navNosotros }}">Nosotros</a>
         </nav>
         <div style="display: flex; align-items: center; gap: 18px; margin-left: auto;">
@@ -233,7 +233,7 @@
               </sc-for>
             </div>
             <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 10px;">
-              <a href="#" style="padding: 14px 24px; background: #C9081F; color: #fff; border-radius: 6px; font-size: 15px; font-weight: 600; white-space: nowrap; transition: background .2s;" style-hover="background: #A90619; color: #fff;">Consultar financiación</a>
+              <a href="https://wa.me/5492995189429?text=Hola,%20me%20gustar%C3%ADa%20consultar%20por%20las%20opciones%20de%20financiaci%C3%B3n" target="_blank" style="padding: 14px 24px; background: #C9081F; color: #fff; border-radius: 6px; font-size: 15px; font-weight: 600; white-space: nowrap; transition: background .2s;" style-hover="background: #A90619; color: #fff;">Consultar financiación</a>
               <a href="#" style="padding: 14px 24px; background: transparent; color: #fff; border: 1px solid #2B2B2B; border-radius: 6px; font-size: 15px; font-weight: 600; white-space: nowrap; transition: border-color .2s;" style-hover="border-color: #565656; color: #fff;">Simular cuota</a>
             </div>
           </div>
@@ -473,7 +473,7 @@
               </sc-for>
             </div>
             <a href="https://wa.me/5492995189429?text=Hola,%20vengo%20desde%20la%20p%C3%A1gina%20web%20y%20quiero%20saber%20sobre%20este%20auto:%20{{current.title}}" target="_blank" style="display: block; margin-top: 18px; padding: 15px; background: #C9081F; color: #fff; border-radius: 6px; text-align: center; font-size: 15px; font-weight: 600; transition: background .2s;" style-hover="background: #A90619; color: #fff;">Consultar por WhatsApp</a>
-            <a href="#" style="display: block; margin-top: 10px; padding: 15px; background: #fff; border: 1px solid #090909; border-radius: 6px; text-align: center; font-size: 15px; font-weight: 600; transition: background .2s, color .2s;" style-hover="background: #090909; color: #fff;">Consultar financiación</a>
+            <a href="https://wa.me/5492995189429?text=Hola,%20me%20gustar%C3%ADa%20consultar%20opciones%20de%20financiaci%C3%B3n%20para%20el%20veh%C3%ADculo%20{{ current.title }}" target="_blank" style="display: block; margin-top: 10px; padding: 15px; background: #fff; border: 1px solid #090909; border-radius: 6px; text-align: center; font-size: 15px; font-weight: 600; transition: background .2s, color .2s;" style-hover="background: #090909; color: #fff;">Consultar financiación</a>
             <div style="display: flex; gap: 10px; margin-top: 12px;">
               <button onClick="{{ current.toggle }}" style="{{ current.favWideStyle }}">♥ {{ current.favLabel }}</button>
               <button style="flex: 1; padding: 12px; background: #fff; border: 1px solid #E4E4E4; border-radius: 6px; font-size: 14px; font-weight: 600; cursor: pointer; transition: border-color .2s;" style-hover="border-color: #090909;">Compartir</button>
@@ -672,7 +672,7 @@
           <div style="font-size: 12.5px; font-weight: 600; color: #8A8A8A;">SITIO</div>
           <a href="#" onClick="{{ goHome }}" style="font-size: 14.5px; color: #fff;">Inicio</a>
           <a href="#" onClick="{{ goCatalogo }}" style="font-size: 14.5px; color: #fff;">Vehículos</a>
-          <a href="#" style="font-size: 14.5px; color: #fff;">Financiación</a>
+          <a href="https://wa.me/5492995189429?text=Hola,%20me%20gustar%C3%ADa%20consultar%20por%20las%20opciones%20de%20financiaci%C3%B3n" target="_blank" style="font-size: 14.5px; color: #fff;">Financiación</a>
           <a href="#" onClick="{{ goNosotros }}" style="font-size: 14.5px; color: #fff;">Nosotros</a>
         </div>
         <div style="display: flex; flex-direction: column; gap: 10px;">
@@ -792,7 +792,7 @@
           <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 14px; font-size: 14px; color: #C4C4C4;">
             <span>Entrega inmediata</span><span>Sistema llave por llave</span><span>Tomamos tu usado</span>
           </div>
-          <button style="width: 100%; margin-top: 16px; padding: 14px; background: #C9081F; color: #fff; border: none; border-radius: 6px; font-size: 15px; font-weight: 600;">Consultar financiación</button>
+          <a href="https://wa.me/5492995189429?text=Hola,%20me%20gustar%C3%ADa%20consultar%20opciones%20de%20financiaci%C3%B3n%20para%20el%20veh%C3%ADculo%20{{ current.title }}" target="_blank" style="display: block; text-align: center; width: 100%; margin-top: 16px; padding: 14px; background: #C9081F; color: #fff; border: none; border-radius: 6px; font-size: 15px; font-weight: 600;">Consultar financiación</a>
         </div>
       </div>
       </sc-if>
